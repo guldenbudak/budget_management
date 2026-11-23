@@ -72,7 +72,9 @@ class Category(models.Model):
 class Transaction(models.Model):
     # Once "bu kayit neye/kime ait" alanlari
     budget = models.ForeignKey(Budget, on_delete=models.CASCADE, related_name='transactions')
-    category = models.ForeignKey(Category, on_delete=models.PROTECT, related_name='transactions')
+    # RESTRICT: kategori tek basina silinemez, ama butce silinirken
+    # islemler de ayni anda gittigi icin o silmeye izin verir.
+    category = models.ForeignKey(Category, on_delete=models.RESTRICT, related_name='transactions')
     created_by = models.ForeignKey(User, on_delete=models.SET_NULL, related_name='created_transactions', null=True)
 
     # Sonra kaydin kendi degerleri
