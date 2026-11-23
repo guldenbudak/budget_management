@@ -29,3 +29,10 @@ Bu dosyayı **ben** (Gülden) dolduruyorum. Kural: her takıldığım hatayı bu
 ---
 
 <!-- Notlar buradan aşağı eklenecek -->
+
+SET-NULL : kullanma sebebim ali hesabını silebilir ama 
+harcamaları kaybolmamalı neden harcamalar kaybolursa 
+sonradan sıkıntı oluşur harcama nerden yapıldı bulamayız.
+
+null=True → veritabanı boş kabul eder
+blank=True → form boş bırakmaya izin verir
