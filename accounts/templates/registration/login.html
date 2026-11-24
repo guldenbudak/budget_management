@@ -1,0 +1,23 @@
+<!-- Django hatalari <ul class="errorlist"> icinde basiyor ama hic stil vermiyor,
+     o yuzden sayfada gozden kaciyor. Tek satirla kirmizi yapiyoruz. -->
+<style>
+  .errorlist { color: #b00020; }
+</style>
+
+<h1>Giriş Yap</h1>
+
+<!-- method="post" = sifre gonderiyoruz. GET olsaydi sifre adres cubuginda gorunur
+     ve tarayici gecmisine yazilirdi. csrf_token olmadan Django formu reddeder. -->
+<form method="post">
+  {% csrf_token %}
+
+  <!-- form.as_p = LoginView'in gonderdigi kullanici adi ve sifre alanlarini,
+       hata mesajlariyla birlikte Django kendisi bassin. -->
+  {{ form.as_p }}
+
+  <button type="submit">Giriş yap</button>
+</form>
+
+<!-- {% url 'register' %} → urls.py'deki name='register' olan adresi bulur.
+     Adresi degistirirsek burasi kendiliginden guncellenir. -->
+<p>Hesabın yok mu? <a href="{% url 'register' %}">Kayıt ol</a></p>

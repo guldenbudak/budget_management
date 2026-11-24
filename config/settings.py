@@ -127,3 +127,16 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
+
+# Kimlik dogrulama yonlendirmeleri
+# https://docs.djangoproject.com/en/6.0/ref/settings/#auth
+
+# Giris yapmamis biri @login_required bir sayfaya girmeye calisirsa buraya yollanir.
+LOGIN_URL = 'login'
+
+# Giris basarili olunca kullanici buraya yollanir.
+LOGIN_REDIRECT_URL = 'dashboard'
+
+# Cikis yapinca buraya yollanir.
+LOGOUT_REDIRECT_URL = 'login'
