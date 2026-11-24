@@ -10,9 +10,9 @@ DEFAULT_CATEGORIES = [
     ('Ulaşım', MoneyKind.EXPENSE),
     ('Eğlence', MoneyKind.EXPENSE),
     ('Diğer', MoneyKind.EXPENSE),
+    ('Maaş', MoneyKind.INCOME),
     ('Ek Gelir', MoneyKind.INCOME),
     ('Diğer', MoneyKind.INCOME),
-    ('Maaş', MoneyKind.INCOME),
 ]
 
 
@@ -20,7 +20,7 @@ DEFAULT_CATEGORIES = [
 def create_personal_budget(sender, instance, created, **kwargs):
     if created:  # sadece YENİ kullanıcı oluşunca çalışsın
         budget = Budget.objects.create(name='Kişisel Bütçem', owner=instance)
-        Membership.objects.create(user=instance, budget=budget, role='owner')
+        Membership.objects.create(user=instance, budget=budget, role=Membership.Role.OWNER)
 
 
 @receiver(post_save, sender=Budget)
