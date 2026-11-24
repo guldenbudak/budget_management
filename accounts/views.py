@@ -1,6 +1,7 @@
-from.forms import RegisterForm
 from django.contrib.auth import login
 from django.shortcuts import render, redirect
+
+from .forms import RegisterForm
 
 
 def register(request):
@@ -10,7 +11,7 @@ def register(request):
             user = form.save()
             login(request, user)
             return redirect('dashboard')
-
     else:
         form = RegisterForm()
+
     return render(request, 'registration/register.html', {'form': form})

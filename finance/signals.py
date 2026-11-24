@@ -27,8 +27,8 @@ def create_personal_budget(sender, instance, created, **kwargs):
 def create_default_categories(sender, instance, created, **kwargs):
     if created:
         for category_name, category_type in DEFAULT_CATEGORIES:
-            (Category.objects.create
-             (budget=instance,
-              name=category_name,
-              kind=category_type)
-             )
+            Category.objects.create(
+                budget=instance,
+                name=category_name,
+                kind=category_type,
+            )

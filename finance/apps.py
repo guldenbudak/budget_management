@@ -5,4 +5,6 @@ class FinanceConfig(AppConfig):
     name = 'finance'
 
     def ready(self):
-        from . import signals
+        # Import etmezsek signals.py hic calismaz, dolayisiyla signal'lar kayit olmaz.
+        # Degiskeni kullanmadigimiz icin editor uyarir; # noqa onu susturur.
+        from . import signals  # noqa
