@@ -36,3 +36,7 @@ sonradan sıkıntı oluşur harcama nerden yapıldı bulamayız.
 
 null=True → veritabanı boş kabul eder
 blank=True → form boş bırakmaya izin verir
+
+Ne zaman
+list_filter	Alanın değerleri sayılı ise: tür, bütçe, durum, rol
+search_fields	Alan serbest metin ise: açıklama, isim, e-posta
