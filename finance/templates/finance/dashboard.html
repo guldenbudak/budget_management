@@ -6,7 +6,7 @@
     {% for budget in budgets %}
     <li><a href="{% url 'budget_detail' budget.id %}">{{ budget.name }}</a></li>
     {% empty %}
-    <li>Bütçe Bulunamadı !</li>
+    <li>Henüz bir bütçen yok.</li>
     {% endfor %}
 </ul>
 
