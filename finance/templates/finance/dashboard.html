@@ -1,24 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Dashboard</title>
-
-</head>
-<body>
+{% extends 'base.html' %}
+{% block content %}
 <h1>Hoş geldin {{ user.username }}</h1>
 <h2>Bütçelerim</h2>
 <ul>
-{% for budget in budgets %}
-    <li>{{ budget.name }}</li>
-{% empty %}
+    {% for budget in budgets %}
+    <li><a href="{% url 'budget_detail' budget.id %}">{{ budget.name }}</a></li>
+    {% empty %}
     <li>Bütçe Bulunamadı !</li>
-{% endfor %}
+    {% endfor %}
 </ul>
-<form method="post" action="{% url 'logout' %}">
-    {% csrf_token %}
-    <button type="submit">Çıkış</button>
-</form>
 
-</body>
-</html>
+{% endblock %}

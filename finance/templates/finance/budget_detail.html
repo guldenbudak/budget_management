@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>{{ budget.name }}</h1>
+
+<ul>
+    {% for transaction in transactions %}
+    <li>{{ transaction.date }} -
+        {{ transaction.category.name }} -
+        {{ transaction.amount }} -
+        {{ transaction.get_kind_display }} -
+        {{ transaction.description }}
+    </li>
+
+    {% empty %}
+    <li>Bütçe Bilgisi Bulunamadı !</li>
+    {% endfor %}
+
+</ul>
+{% endblock %}

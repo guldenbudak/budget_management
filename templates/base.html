@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Bütçe Takip{% endblock %}</title>
+    <style>
+        .errorlist { color: #b00020; }
+    </style>
+</head>
+<body>
+
+{# Cikis butonu sadece giris yapmis kullaniciya gorunsun. #}
+{% if user.is_authenticated %}
+    <p>
+        {{ user.username }} —
+        <a href="{% url 'dashboard' %}">Panel</a>
+    </p>
+    <form method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit">Çıkış</button>
+    </form>
+    <hr>
+{% endif %}
+
+{# Her sayfanin kendi icerigi buraya gelecek. #}
+{% block content %}{% endblock %}
+
+</body>
+</html>
