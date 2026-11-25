@@ -7,9 +7,17 @@
 </head>
 <body>
 <h1>Hoş geldin {{ user.username }}</h1>
+<h2>Bütçelerim</h2>
+<ul>
+{% for budget in budgets %}
+    <li>{{ budget.name }}</li>
+{% empty %}
+    <li>Bütçe Bulunamadı !</li>
+{% endfor %}
+</ul>
 <form method="post" action="{% url 'logout' %}">
-  {% csrf_token %}
-  <button type="submit">Çıkış</button>
+    {% csrf_token %}
+    <button type="submit">Çıkış</button>
 </form>
 
 </body>

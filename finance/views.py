@@ -4,4 +4,4 @@ from django.shortcuts import render
 
 @login_required
 def dashboard(request):
-    return render(request, 'finance/dashboard.html')
+    return render(request, 'finance/dashboard.html', {'budgets': request.user.budgets.all()})
