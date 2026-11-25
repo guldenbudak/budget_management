@@ -21,5 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # BASGARSON: adresi finance app'inin kendi urls.py'sine devrediyor.
     path('', include('finance.urls')),
-    path('accounts/', include('accounts.urls')),
+    path('', include('accounts.urls')),
 ]
