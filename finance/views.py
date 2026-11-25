@@ -11,5 +11,5 @@ def dashboard(request):
 @login_required
 def budget_detail(request, budget_id):
     budget = get_user_budget(request.user, budget_id)
-    transactions = budget.transactions.all()
+    transactions = budget.transactions.select_related('category', 'created_by')
     return render(request, 'finance/budget_detail.html', {'budget': budget, 'transactions': transactions})
