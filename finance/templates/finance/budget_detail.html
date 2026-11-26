@@ -2,9 +2,12 @@
 {% block content %}
 <h1>{{ budget.name }}</h1>
 
+        <a href="{% url 'transaction_create' budget.id %}">İşlem Ekle</a>
+
 <ul>
     {% for transaction in transactions %}
-    <li>{{ transaction.date }} -
+    <li>
+        {{ transaction.date }} -
         {{ transaction.category.name }} -
         {{ transaction.amount }} -
         {{ transaction.get_kind_display }} -

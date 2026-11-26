@@ -23,6 +23,9 @@
 {% endif %}
 
 {# Her sayfanin kendi icerigi buraya gelecek. #}
+{% for message in messages %}
+    <p>{{ message }}</p>
+{% endfor %}
 {% block content %}{% endblock %}
 
 </body>
