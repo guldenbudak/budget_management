@@ -7,8 +7,7 @@
 
 <p><strong>{{ transaction }}</strong></p>
 
-{# action yazmiyoruz: form bulundugu adrese gonderilir, yani bu silme adresine.
-   View POST gorunce siler; GET ile bu sayfa sadece gosterilir. #}
+
 <form method="post">
     {% csrf_token %}
     <button type="submit">Sil</button>
