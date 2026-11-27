@@ -1,6 +1,14 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>{{ budget.name }}</h1>
+{# form.instance.pk: duzenlemede dolu, yeni kayitta bos.
+   Ayni template iki is yapiyor, baslik ikisini ayiriyor. #}
+{% if form.instance.pk %}
+    <h1>İşlemi düzenle</h1>
+{% else %}
+    <h1>Yeni işlem</h1>
+{% endif %}
+
+<p>{{ budget.name }}</p>
 <form method="post">
 
     {% csrf_token %}

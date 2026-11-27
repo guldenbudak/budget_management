@@ -1,12 +1,9 @@
-from django.contrib.auth.decorators import login_required
-from django.core.exceptions import PermissionDenied
-from django.db import transaction
-from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
-from .models import Transaction
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect
 
 from .forms import TransactionForm
-from .utils import get_user_budget
+from .utils import get_user_budget, get_editable_transaction
 
 
 @login_required
@@ -17,7 +14,14 @@ def dashboard(request):
 @login_required
 def budget_detail(request, budget_id):
     budget = get_user_budget(request.user, budget_id)
-    transactions = budget.transactions.select_related('category', 'created_by')
+    transactions = list(budget.transactions.select_related('category', 'created_by', 'budget'))
+
+    # Template'ten can_edit(user) cagrilamiyor (parametre gonderilemiyor),
+    # o yuzden sonucu burada hesaplayip her islemin uzerine yaziyoruz.
+    # Kural yine tek yerde duruyor: Transaction.can_edit
+    for t in transactions:
+        t.editable = t.can_edit(request.user)
+
     return render(request, 'finance/budget_detail.html', {'budget': budget, 'transactions': transactions})
 
 
@@ -40,9 +44,7 @@ def transaction_create(request, budget_id):
 
 @login_required
 def transaction_edit(request, transaction_id):
-    transaction = get_object_or_404(Transaction, pk=transaction_id, budget__members=request.user)
-    if not transaction.can_edit(request.user):
-        raise PermissionDenied
+    transaction = get_editable_transaction(request.user, transaction_id)
     if request.method == 'POST':
         form = TransactionForm(request.POST, budget=transaction.budget, instance=transaction)
         if form.is_valid():
@@ -56,9 +58,7 @@ def transaction_edit(request, transaction_id):
 
 @login_required
 def transaction_delete(request, transaction_id):
-    transaction = get_object_or_404(Transaction, pk=transaction_id, budget__members=request.user)
-    if not transaction.can_edit(request.user):
-        raise PermissionDenied
+    transaction = get_editable_transaction(request.user, transaction_id)
     if request.method == 'POST':
         budget_id = transaction.budget_id
         transaction.delete()

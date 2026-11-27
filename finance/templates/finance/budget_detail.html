@@ -12,8 +12,12 @@
         {{ transaction.amount }} -
         {{ transaction.get_kind_display }} -
         {{ transaction.description }}
-        <a href="{% url 'transaction_edit' transaction.id %}">Düzenle</a>
-        <a href="{% url 'transaction_delete' transaction.id %}">Sil</a>
+        {# editable bayragi view'da can_edit ile hesaplandi.
+           Gizlemek guvenlik degil, kolaylik: asil kontrol view'da. #}
+        {% if transaction.editable %}
+            <a href="{% url 'transaction_edit' transaction.id %}">Düzenle</a>
+            <a href="{% url 'transaction_delete' transaction.id %}">Sil</a>
+        {% endif %}
 
     </li>
 
