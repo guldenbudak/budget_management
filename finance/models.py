@@ -89,3 +89,7 @@ class Transaction(models.Model):
 
     def __str__(self):
         return f'{self.amount}, {self.date}, {self.category}'
+
+    def can_edit(self, user):
+        return self.created_by_id == user.id or self.budget.owner_id == user.id
+

@@ -40,3 +40,8 @@ blank=True → form boş bırakmaya izin verir
 Ne zaman
 list_filter	Alanın değerleri sayılı ise: tür, bütçe, durum, rol
 search_fields	Alan serbest metin ise: açıklama, isim, e-posta
+HTML her şeyi metin olarak gönderir. Tarayıcı sayı diye bir şey bilmez, tarih diye bir şey bilmez — hepsi yazı.
+
+Django bu yazıları gerçek Python değerlerine çeviriyor. Sonuç cleaned_data'ya yazılıyor.
+
+super().clean() Django'ya diyor ki: "bu formu doğrularken o kuralları da kontrol et."
